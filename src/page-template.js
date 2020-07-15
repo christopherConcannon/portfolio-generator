@@ -13,81 +13,6 @@ const generateAbout = (aboutText) => {
 };
 
 const generateProjects = projectsArr => {
-
-// first version with no distinction between featured and non-featured
-// // create new array of interpolated HTML for each project using map.  destructure the object properties in line when it is passed as argument to map method
-// const projectHtmlArr = projectsArr.map(({ name, description, languages, link }) => {
-//   return `
-//     <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-//       <h3 class="portfolio-item-title text-light">${name}</hx>
-//       <h5 class="portfolio-languages">
-//         Built With: 
-//         ${languages.join(', ')}
-//       </h5>
-//       <p>${description}</p>
-//       <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-//     <div>
-//   `;
-// });
-
-// SECOND VERSION CREATING SEPERATE ARRAYS FOR FEATURED/NONFEATURED
-  // get array of just featured projects
-  // const featuredProjects = projectsArr.filter(project => {
-  //   if (project.feature) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // });
-
-  // // get array of all non-featured projects
-  // const nonFeaturedProjects = projectsArr.filter(project => {
-  //   if (!project.feature) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // });
-
-  // const featuredProjectHtmlArr = featuredProjects.map(({ name, description, languages, link }) => {
-  //   return `
-  //     <div class="col-12 mb-2 bg-dark text-light p-3 flex-column">
-  //       <h3 class="portfolio-item-title text-light">${name}</hx>
-  //       <h5 class="portfolio-languages">
-  //         Built With: 
-  //         ${languages.join(', ')}
-  //       </h5>
-  //       <p>${description}</p>
-  //       <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-  //     <div>
-  //   `;
-  // });
-
-  // const nonFeaturedProjectHtmlArr = nonFeaturedProjects.map(({ name, description, languages, link }) => {
-  //   return `
-  //     <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-  //       <h3 class="portfolio-item-title text-light">${name}</hx>
-  //       <h5 class="portfolio-languages">
-  //         Built With: 
-  //         ${languages.join(', ')}
-  //       </h5>
-  //       <p>${description}</p>
-  //       <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-  //     <div>
-  //   `;
-  // });
-  // // when outputting newly mapped array of HTML for each project, use join to combine all array elements into one string of HTML (this isn't React so you have to handle that)
-  // return `
-  //   <section class="my-3" id="portfolio">
-  //     <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
-  //     <div class="flex-row justify-space-between">
-  //       ${featuredProjectHtmlArr.join('')}
-  //       ${nonFeaturedProjectHtmlArr.join('')}
-  //     </div>
-  //   </section>
-  // `
-
-  // THIRD VERSION REFACTORED
   return `
     <section class="my-3" id="portfolio">
       <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
@@ -97,14 +22,14 @@ const generateProjects = projectsArr => {
           .map(({ name, description, languages, link  }) => {
             return `
             <div class="col-12 mb-2 bg-dark text-light p-3 flex-column">
-              <h3 class="portfolio-item-title text-light">${name}</hx>
+              <h3 class="portfolio-item-title text-light">${name}</h3>
               <h5 class="portfolio-languages">
                 Built With: 
                 ${languages.join(', ')}
               </h5>
               <p>${description}</p>
               <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-            <div>
+            </div>
             `;
           })
           .join('')
@@ -115,14 +40,14 @@ const generateProjects = projectsArr => {
           .map(({ name, description, languages, link  }) => {
             return `
             <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-              <h3 class="portfolio-item-title text-light">${name}</hx>
+              <h3 class="portfolio-item-title text-light">${name}</h3>
               <h5 class="portfolio-languages">
                 Built With: 
                 ${languages.join(', ')}
               </h5>
               <p>${description}</p>
               <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-            <div>
+            </div>
             `;
           })
           .join('')
@@ -135,18 +60,8 @@ const generateProjects = projectsArr => {
 }
 
 module.exports = (templateData) => {
-	console.log(templateData);
 
-	// destructure projects and about data from templateData based on their property key names.  the rest operator (...) takes everything that's left from the templateData object (minus projects and about) and stores it in an object named header
 	const { projects, about, ...header } = templateData;
-	// console.log(header)
-	// console.log(about)
-	// console.log(projects)
-	// we could do this to package up the header data in one object, instead we will use the rest operator above (...header)
-	// const header = {
-	//   name: templateData.name,
-	//   github: templateData.github
-	// }
 
 	return `
   <!DOCTYPE html>
@@ -182,49 +97,3 @@ module.exports = (templateData) => {
   </html>
   `;
 };
-
-// {
-//   name: 'Lernantino',
-//   github: 'lernantino',
-//   confirmAbout: true,
-//   about:
-//     'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et.',
-//   projects: [
-//     {
-//       name: 'Run Buddy',
-//       description:
-//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-//       languages: ['HTML', 'CSS'],
-//       link: 'https://github.com/lernantino/run-buddy',
-//       feature: true,
-//       confirmAddProject: true
-//     },
-//     {
-//       name: 'Taskinator',
-//       description:
-//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-//       languages: ['JavaScript', 'HTML', 'CSS'],
-//       link: 'https://github.com/lernantino/taskinator',
-//       feature: true,
-//       confirmAddProject: true
-//     },
-//     {
-//       name: 'Taskmaster Pro',
-//       description:
-//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-//       languages: ['JavaScript', 'jQuery', 'CSS', 'HTML', 'Bootstrap'],
-//       link: 'https://github.com/lernantino/taskmaster-pro',
-//       feature: false,
-//       confirmAddProject: true
-//     },
-//     {
-//       name: 'Robot Gladiators',
-//       description:
-//         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque.',
-//       languages: ['JavaScript'],
-//       link: 'https://github.com/lernantino/robot-gladiators',
-//       feature: false,
-//       confirmAddProject: false
-//     }
-//   ]
-// };
